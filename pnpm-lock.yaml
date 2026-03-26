@@ -56,6 +56,9 @@ importers:
       tw-animate-css:
         specifier: ^1.4.0
         version: 1.4.0
+      web-haptics:
+        specifier: ^0.0.6
+        version: 0.0.6(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
     devDependencies:
       '@biomejs/biome':
         specifier: 2.4.9
@@ -3054,6 +3057,23 @@ packages:
       happy-dom:
         optional: true
       jsdom:
+        optional: true
+
+  web-haptics@0.0.6:
+    resolution: {integrity: sha512-eCzcf1LDi20+Fr0x9V3OkX92k0gxEQXaHajmhXHitsnk6SxPeshv8TBtBRqxyst8HI1uf2FyFVE7QS3jo1gkrw==}
+    peerDependencies:
+      react: '>=18'
+      react-dom: '>=18'
+      svelte: '>=4'
+      vue: '>=3'
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-dom:
+        optional: true
+      svelte:
+        optional: true
+      vue:
         optional: true
 
   web-streams-polyfill@3.3.3:
@@ -6510,6 +6530,11 @@ snapshots:
       '@vitest/browser-playwright': 4.1.2(msw@2.12.14(@types/node@24.12.0)(typescript@5.9.3))(playwright@1.58.2)(vite@8.0.3(@types/node@24.12.0)(esbuild@0.27.4)(jiti@2.6.1))(vitest@4.1.2)
     transitivePeerDependencies:
       - msw
+
+  web-haptics@0.0.6(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
+    optionalDependencies:
+      react: 19.2.4
+      react-dom: 19.2.4(react@19.2.4)
 
   web-streams-polyfill@3.3.3: {}
 

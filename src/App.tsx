@@ -21,7 +21,7 @@ function App() {
   const [position, setPosition] = useState<Position>("top-center");
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center gap-4">
+    <div className="flex min-h-screen flex-col items-center justify-center gap-4 px-8">
       <Select
         placeholder="Select position"
         selectedKey={position}
@@ -42,10 +42,10 @@ function App() {
           </ListBox>
         </Select.Popover>
       </Select>
-      <div className="flex gap-2">
+      <div className="flex flex-wrap  gap-2">
         <Button
           variant="secondary"
-          className="bg-sky-100 text-sky-700"
+          className="bg-sky-100 text-sky-700  "
           onPress={() =>
             showAnimatedToast({
               variant: "info",

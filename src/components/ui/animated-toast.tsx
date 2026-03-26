@@ -1,12 +1,20 @@
 import { gsap } from "gsap";
 import { useCallback, useEffect, useRef } from "react";
 import { Toaster, toast } from "sonner";
+import { useWebHaptics } from "web-haptics/react";
 import type {
   AnimatedToastProps,
   ShowAnimatedToastProps,
   ToastVariantKey,
 } from "./animated-toast.types";
 import { toastVariants } from "./animated-toast.variants";
+
+const hapticMap: Record<ToastVariantKey, string> = {
+  info: "selection",
+  success: "success",
+  warning: "warning",
+  error: "error",
+};
 
 function getSlideOffset(position?: string): number {
   if (!position) return -20;
@@ -24,6 +32,7 @@ function AnimatedToast({
   const iconRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLSpanElement>(null);
   const dismissingRef = useRef(false);
+  const { trigger: haptic } = useWebHaptics();
   const v = toastVariants[variant];
   const Icon = v.icon;
   const slideOffset = getSlideOffset(position);
@@ -84,6 +93,8 @@ function AnimatedToast({
     const icon = iconRef.current;
     const text = textRef.current;
     if (!container || !icon || !text) return;
+
+    haptic(hapticMap[variant]);
 
     gsap.set(container, { scale: 0.6, opacity: 0, y: slideOffset });
     gsap.set(icon, { backgroundColor: "transparent" });
