@@ -22,6 +22,12 @@ function App() {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center gap-4 px-8">
+      <div className="flex flex-col items-center gap-1 text-center">
+        <h1 className="text-2xl font-bold text-gray-900">Animated Toasts</h1>
+        <p className="text-sm text-gray-500">
+          Built on top of Sonner with GSAP animations
+        </p>
+      </div>
       <Select
         placeholder="Select position"
         selectedKey={position}
@@ -42,10 +48,10 @@ function App() {
           </ListBox>
         </Select.Popover>
       </Select>
-      <div className="flex flex-wrap  gap-2">
+      <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row">
         <Button
           variant="secondary"
-          className="bg-sky-100 text-sky-700  "
+          className="bg-sky-100 text-sky-700 w-full py-6 text-lg transition-all sm:w-auto sm:py-2 sm:text-sm"
           onPress={() =>
             showAnimatedToast({
               variant: "info",
@@ -59,7 +65,7 @@ function App() {
         </Button>
         <Button
           variant="secondary"
-          className="bg-emerald-100 text-emerald-700"
+          className="bg-emerald-100 text-emerald-700 w-full py-6 text-lg transition-all sm:w-auto sm:py-2 sm:text-sm"
           onPress={() =>
             showAnimatedToast({
               variant: "success",
@@ -73,7 +79,7 @@ function App() {
         </Button>
         <Button
           variant="secondary"
-          className="bg-amber-100 text-amber-700"
+          className="bg-amber-100 text-amber-700 w-full py-6 text-lg transition-all sm:w-auto sm:py-2 sm:text-sm"
           onPress={() =>
             showAnimatedToast({
               variant: "warning",
@@ -87,7 +93,7 @@ function App() {
         </Button>
         <Button
           variant="secondary"
-          className="bg-red-100 text-red-700"
+          className="bg-red-100 text-red-700 w-full py-6 text-lg transition-all sm:w-auto sm:py-2 sm:text-sm"
           onPress={() =>
             showAnimatedToast({
               variant: "error",

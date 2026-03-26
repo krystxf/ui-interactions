@@ -1,6 +1,10 @@
 @import "tailwindcss";
 @import "@heroui/styles";
 
+body {
+  font-family: "Poppins", sans-serif;
+}
+
 /* Disable Sonner's built-in animations so GSAP controls everything */
 [data-sonner-toast] {
   transition: none !important;
