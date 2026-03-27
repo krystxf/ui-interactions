@@ -1,28 +1,30 @@
 {
 	"name": "ui-interactions",
+	"version": "0.1.0",
 	"private": true,
-	"version": "0.0.0",
 	"type": "module",
 	"scripts": {
-		"dev": "vite",
-		"build": "tsc -b && vite build",
-		"lint": "biome check .",
-		"lint:fix": "biome check --write .",
-		"format": "biome format --write .",
-		"preview": "vite preview"
+		"build": "next build",
+		"check": "biome check .",
+		"check:write": "biome check --write .",
+		"check:unsafe": "biome check --write --unsafe .",
+		"dev": "next dev --turbo",
+		"preview": "next build && next start",
+		"start": "next start",
+		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
 		"@base-ui/react": "^1.3.0",
-		"@fontsource-variable/geist": "^5.2.8",
 		"@heroui/react": "^3.0.1",
 		"@heroui/styles": "^3.0.1",
-		"@tailwindcss/vite": "^4.2.2",
 		"class-variance-authority": "^0.7.1",
 		"clsx": "^2.1.1",
 		"gsap": "^3.14.2",
 		"lucide-react": "^1.7.0",
-		"react": "^19.2.4",
-		"react-dom": "^19.2.4",
+		"next": "^15.2.3",
+		"react": "^19.0.0",
+		"react-dom": "^19.0.0",
+		"react-svg-shape": "^1.0.11",
 		"shadcn": "^4.1.0",
 		"sonner": "^2.0.7",
 		"tailwind-merge": "^3.5.0",
@@ -31,16 +33,12 @@
 		"web-haptics": "^0.0.6"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.4.9",
+		"@biomejs/biome": "^2.4.9",
+		"@tailwindcss/postcss": "^4.0.15",
 		"@types/node": "^24.12.0",
 		"@types/react": "^19.2.14",
 		"@types/react-dom": "^19.2.3",
-		"@vitejs/plugin-react": "^6.0.1",
-		"@vitest/browser-playwright": "^4.1.2",
-		"@vitest/coverage-v8": "^4.1.2",
-		"playwright": "^1.58.2",
-		"typescript": "~5.9.3",
-		"vite": "^8.0.1",
-		"vitest": "^4.1.2"
+		"postcss": "^8.5.3",
+		"typescript": "~5.9.3"
 	}
 }
