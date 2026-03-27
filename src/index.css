@@ -2,50 +2,50 @@
 @import "@heroui/styles";
 
 body {
-  font-family: "Poppins", sans-serif;
+	font-family: "Poppins", sans-serif;
 }
 
 /* Disable Sonner's built-in animations so GSAP controls everything */
 [data-sonner-toast] {
-  transition: none !important;
-  animation: none !important;
-  opacity: 1 !important;
+	transition: none !important;
+	animation: none !important;
+	opacity: 1 !important;
 }
 
 /* Override Sonner's mobile full-width behavior so the icon-first expand animation works.
    On mobile Sonner forces width:100% on the toaster and a calc-based width on toasts,
    which prevents the GSAP width expansion. We restore the desktop positioning rules. */
 @media (max-width: 600px) {
-  [data-sonner-toaster] {
-    width: var(--width) !important;
-  }
-  [data-sonner-toaster][data-x-position="center"] {
-    left: 50% !important;
-    right: auto !important;
-    transform: translateX(-50%) !important;
-  }
-  [data-sonner-toaster][data-x-position="left"] {
-    left: var(--offset-left) !important;
-    right: auto !important;
-  }
-  [data-sonner-toaster][data-x-position="right"] {
-    right: var(--offset-right) !important;
-    left: auto !important;
-  }
-  [data-sonner-toaster] [data-sonner-toast] {
-    width: auto !important;
-  }
-  [data-sonner-toaster][data-x-position="left"] [data-sonner-toast] {
-    left: 0 !important;
-    right: auto !important;
-  }
-  [data-sonner-toaster][data-x-position="right"] [data-sonner-toast] {
-    right: 0 !important;
-    left: auto !important;
-  }
-  [data-sonner-toaster][data-x-position="center"] [data-sonner-toast] {
-    left: 50% !important;
-    right: auto !important;
-    transform: translateX(-50%);
-  }
+	[data-sonner-toaster] {
+		width: var(--width) !important;
+	}
+	[data-sonner-toaster][data-x-position="center"] {
+		left: 50% !important;
+		right: auto !important;
+		transform: translateX(-50%) !important;
+	}
+	[data-sonner-toaster][data-x-position="left"] {
+		left: var(--offset-left) !important;
+		right: auto !important;
+	}
+	[data-sonner-toaster][data-x-position="right"] {
+		right: var(--offset-right) !important;
+		left: auto !important;
+	}
+	[data-sonner-toaster] [data-sonner-toast] {
+		width: auto !important;
+	}
+	[data-sonner-toaster][data-x-position="left"] [data-sonner-toast] {
+		left: 0 !important;
+		right: auto !important;
+	}
+	[data-sonner-toaster][data-x-position="right"] [data-sonner-toast] {
+		right: 0 !important;
+		left: auto !important;
+	}
+	[data-sonner-toaster][data-x-position="center"] [data-sonner-toast] {
+		left: 50% !important;
+		right: auto !important;
+		transform: translateX(-50%);
+	}
 }
