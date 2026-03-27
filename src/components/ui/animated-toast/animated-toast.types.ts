@@ -1,4 +1,4 @@
-import type { ComponentType, SVGProps } from "react";
+import type { ComponentType } from "react";
 import type { ToasterProps } from "sonner";
 
 export type ToastPosition = ToasterProps["position"];
@@ -10,7 +10,15 @@ export interface ToastVariant {
 	label: string;
 	labelColor: string;
 	textColor: string;
-	icon: ComponentType<SVGProps<SVGSVGElement> & { size?: number | string }>;
+	icon: ComponentType<{
+		animate?: boolean;
+		className?: string;
+		duration?: number;
+		ease?: string;
+		repeat?: number;
+		rotation?: string;
+		strokeWidth?: number;
+	}>;
 }
 
 export type ToastVariantKey = "info" | "success" | "warning" | "error";

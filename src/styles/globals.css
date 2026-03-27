@@ -1,0 +1,14 @@
+@import "tailwindcss";
+@import "@heroui/styles";
+
+@theme {
+	--animate-blob-appear: blob-appear 0.5s ease-out forwards;
+}
+@keyframes blob-appear {
+	from {
+		opacity: 0.2;
+	}
+	to {
+		opacity: 0.8;
+	}
+}

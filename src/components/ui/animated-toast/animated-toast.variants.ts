@@ -1,4 +1,9 @@
-import { BadgeAlert, BadgeCheck, BadgeInfo, BadgeX } from "lucide-react";
+import {
+	SquigglyBadgeAlert,
+	SquigglyBadgeCheck,
+	SquigglyBadgeInfo,
+	SquigglyBadgeX,
+} from "@/components/ui/squiggly-badge";
 import type { ToastVariant, ToastVariantKey } from "./animated-toast.types";
 
 export const toastVariants: Record<ToastVariantKey, ToastVariant> = {
@@ -9,7 +14,7 @@ export const toastVariants: Record<ToastVariantKey, ToastVariant> = {
 		label: "Info",
 		labelColor: "text-sky-700/50",
 		textColor: "text-sky-800/60",
-		icon: BadgeInfo,
+		icon: SquigglyBadgeInfo,
 	},
 	success: {
 		bgColor: "rgba(167, 243, 208, 0.3)",
@@ -18,7 +23,7 @@ export const toastVariants: Record<ToastVariantKey, ToastVariant> = {
 		label: "Success",
 		labelColor: "text-emerald-700/50",
 		textColor: "text-emerald-800/60",
-		icon: BadgeCheck,
+		icon: SquigglyBadgeCheck,
 	},
 	warning: {
 		bgColor: "rgba(253, 230, 138, 0.3)",
@@ -27,7 +32,7 @@ export const toastVariants: Record<ToastVariantKey, ToastVariant> = {
 		label: "Warning",
 		labelColor: "text-amber-700/50",
 		textColor: "text-amber-800/60",
-		icon: BadgeAlert,
+		icon: SquigglyBadgeAlert,
 	},
 	error: {
 		bgColor: "rgba(254, 202, 202, 0.3)",
@@ -36,6 +41,6 @@ export const toastVariants: Record<ToastVariantKey, ToastVariant> = {
 		label: "Error",
 		labelColor: "text-red-700/50",
 		textColor: "text-red-800/60",
-		icon: BadgeX,
+		icon: SquigglyBadgeX,
 	},
 };

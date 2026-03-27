@@ -1,3 +1,6 @@
+"use client";
+
+import "./animated-toast.css";
 import { gsap } from "gsap";
 import { useCallback, useEffect, useRef } from "react";
 import { Toaster, toast } from "sonner";
@@ -155,18 +158,25 @@ function AnimatedToast({
 
 	return (
 		<div
-			ref={containerRef}
 			className="flex items-center overflow-hidden rounded-[1.75rem] border border-white/10 py-1.5 pr-1.5 pl-1.5 font-bold shadow-sm backdrop-blur-sm"
+			ref={containerRef}
 		>
 			<div
-				ref={iconRef}
 				className="flex size-10 shrink-0 items-center justify-center rounded-full"
+				ref={iconRef}
 			>
-				<Icon className={`size-8 ${v.iconColor}`} />
+				<Icon
+					animate
+					className={`size-8 ${v.iconColor}`}
+					duration={0.8}
+					ease="power2.inOut"
+					repeat={0}
+					rotation="+=45"
+				/>
 			</div>
 			<span
-				ref={textRef}
 				className="flex items-center overflow-hidden whitespace-nowrap"
+				ref={textRef}
 			>
 				<span className="flex flex-col leading-tight">
 					<span className={`text-sm ${v.labelColor}`}>{v.label}</span>
@@ -186,11 +196,11 @@ function showAnimatedToast({
 	toast.custom(
 		(id) => (
 			<AnimatedToast
-				variant={variant}
-				message={message}
-				toastId={id}
 				duration={duration}
+				message={message}
 				position={position}
+				toastId={id}
+				variant={variant}
 			/>
 		),
 		{
