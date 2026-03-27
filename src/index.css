@@ -46,6 +46,6 @@ body {
 	[data-sonner-toaster][data-x-position="center"] [data-sonner-toast] {
 		left: 50% !important;
 		right: auto !important;
-		transform: translateX(-50%);
+		translate: -50% 0 !important;
 	}
 }
