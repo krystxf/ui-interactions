@@ -11,8 +11,19 @@ const PRESSED_CONTRAST = 6;
 const generateShapePath = (contrast: number) =>
 	generatePath({ complexity: 16, contrast });
 
+function isSafariOrIOSBrowser() {
+	const ua = navigator.userAgent;
+	const isIOS = /iPad|iPhone|iPod/.test(ua);
+	const isWebkit = /WebKit/.test(ua);
+	const isChromeLike = /CriOS|FxiOS|EdgiOS|OPiOS|Chrome|Chromium|Android/.test(
+		ua,
+	);
+	return isIOS || (isWebkit && !isChromeLike);
+}
+
 export default function BlobPage() {
 	const [svgPath, setSvgPath] = useState<string | null>(null);
+	const [animationDisabled, setAnimationDisabled] = useState(false);
 	const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 	const contrastRef = useRef(DEFAULT_CONTRAST);
 
@@ -24,8 +35,13 @@ export default function BlobPage() {
 	}, []);
 
 	useEffect(() => {
+		const shouldDisableAnimation = isSafariOrIOSBrowser();
+		setAnimationDisabled(shouldDisableAnimation);
+
 		setSvgPath(generateShapePath(DEFAULT_CONTRAST));
-		resetInterval();
+		if (!shouldDisableAnimation) {
+			resetInterval();
+		}
 
 		return () => {
 			if (intervalRef.current) clearInterval(intervalRef.current);
@@ -33,12 +49,14 @@ export default function BlobPage() {
 	}, [resetInterval]);
 
 	const handlePointerDown = () => {
+		if (animationDisabled) return;
 		contrastRef.current = PRESSED_CONTRAST;
 		setSvgPath(generateShapePath(PRESSED_CONTRAST));
 		resetInterval();
 	};
 
 	const handlePointerUp = () => {
+		if (animationDisabled) return;
 		contrastRef.current = DEFAULT_CONTRAST;
 		setSvgPath(generateShapePath(DEFAULT_CONTRAST));
 		resetInterval();
@@ -48,7 +66,7 @@ export default function BlobPage() {
 		// biome-ignore lint/a11y/noStaticElementInteractions: full-page press area for morphing blob
 		// biome-ignore lint/a11y/useKeyWithClickEvents: decorative interaction, not a semantic control
 		<div
-			className="relative isolate flex min-h-screen cursor-pointer select-none flex-col items-center justify-center px-8"
+			className={`relative isolate flex min-h-screen select-none flex-col items-center justify-center px-8 ${animationDisabled ? "cursor-default" : "cursor-pointer"}`}
 			onClick={(e) => e.preventDefault()}
 			onPointerDown={handlePointerDown}
 			onPointerLeave={handlePointerUp}
@@ -60,7 +78,9 @@ export default function BlobPage() {
 						<SvgShape.Path
 							colors={["#7c3aed", "#2563eb"]}
 							style={{
-								transition: `all ${INTERVAL_DURATION / 1000}s linear`,
+								transition: animationDisabled
+									? "none"
+									: `all ${INTERVAL_DURATION / 1000}s linear`,
 							}}
 							svgPath={svgPath}
 						/>
@@ -70,7 +90,9 @@ export default function BlobPage() {
 			<div className="relative z-10 flex flex-col items-center gap-1 text-center">
 				<h1 className="font-bold text-2xl text-white">Animated Blob</h1>
 				<p className="text-sm text-white/80">
-					Press and hold to increase contrast
+					{animationDisabled
+						? "Static on Safari and iOS"
+						: "Press and hold to increase contrast"}
 				</p>
 				<Link
 					className="mt-2 text-sm text-white/60 underline underline-offset-2 transition-colors hover:text-white/90"

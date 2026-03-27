@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useWebHaptics } from "web-haptics/react";
 import {
 	SquigglyBadgeAlert,
 	SquigglyBadgeCheck,
@@ -28,50 +29,51 @@ function HoverBadge({
 	Component,
 	color,
 	bg,
+	onPress,
 }: {
 	Component: (typeof variants)[number]["Component"];
 	color: string;
 	bg: string;
+	onPress: () => void;
 }) {
 	const [hovered, setHovered] = useState(false);
 	const [pressed, setPressed] = useState(false);
 
-	const handlePress = () => {
-		if (navigator.vibrate) {
-			navigator.vibrate(50);
-		}
-	};
-
 	return (
-		<div
+		<button
 			className={`flex size-24 items-center justify-center rounded-full transition-all duration-150 ${hovered ? bg : "bg-gray-100"} ${pressed ? "scale-90" : "scale-100"}`}
-			onMouseDown={() => {
+			onPointerDown={() => {
 				setPressed(true);
-				handlePress();
+				onPress();
 			}}
 			onMouseEnter={() => setHovered(true)}
 			onMouseLeave={() => {
 				setHovered(false);
 				setPressed(false);
 			}}
-			onMouseUp={() => setPressed(false)}
-			onTouchEnd={() => setPressed(false)}
-			onTouchStart={() => {
-				setPressed(true);
-				setHovered(true);
-				handlePress();
-			}}
+			onPointerUp={() => setPressed(false)}
+			onPointerCancel={() => setPressed(false)}
+			type="button"
 		>
 			<Component
 				animate={hovered}
 				className={`size-20 transition-colors duration-300 ${hovered ? color : "text-gray-400"}`}
 				duration={12}
 			/>
-		</div>
+		</button>
 	);
 }
 
 export default function SquiggliesPage() {
+	const { trigger: haptic } = useWebHaptics();
+
+	const handlePress = () => {
+		haptic("selection");
+		if (navigator.vibrate) {
+			navigator.vibrate(30);
+		}
+	};
+
 	return (
 		<div className="flex min-h-screen flex-col items-center justify-center gap-8 px-8">
 			<div className="flex flex-col items-center gap-1 text-center">
@@ -85,9 +87,15 @@ export default function SquiggliesPage() {
 					lucide icons
 				</Link>
 			</div>
-			<div className="flex gap-8">
+			<div className="grid grid-cols-2 gap-8 md:flex">
 				{variants.map(({ Component, color, bg }) => (
-					<HoverBadge bg={bg} Component={Component} color={color} key={color} />
+					<HoverBadge
+						bg={bg}
+						Component={Component}
+						color={color}
+						key={color}
+						onPress={handlePress}
+					/>
 				))}
 			</div>
 		</div>
