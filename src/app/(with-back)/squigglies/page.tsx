@@ -60,7 +60,6 @@ function HoverBadge({
 	return (
 		<button
 			className={`flex size-24 items-center justify-center rounded-full transition-all duration-150 ${hovered ? bg : "bg-gray-100"} ${pressed ? "scale-90" : "scale-100"} ${orderClass}`}
-			onClick={onPress}
 			onMouseEnter={() => setHovered(true)}
 			onMouseLeave={() => {
 				setHovered(false);
@@ -72,10 +71,6 @@ function HoverBadge({
 				onPress();
 			}}
 			onPointerUp={() => setPressed(false)}
-			onTouchStart={() => {
-				setPressed(true);
-				onPress();
-			}}
 			type="button"
 		>
 			<Component
