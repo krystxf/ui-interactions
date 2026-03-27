@@ -24,9 +24,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
 	return (
 		<html lang="en">
-			<body
-				className={`${poppins.className} flex min-h-screen flex-col`}
-			>
+			<body className={`${poppins.className} flex min-h-screen flex-col`}>
 				<div className="flex min-h-0 w-full flex-1 flex-col">{children}</div>
 				<Footer />
 			</body>

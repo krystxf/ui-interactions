@@ -91,7 +91,10 @@ export default function SquiggliesPage() {
 		if (now - lastHapticAtRef.current < 120) return;
 		lastHapticAtRef.current = now;
 
-		haptic(pattern);
+		// Defer to escape the pointerdown event context — on iOS Safari,
+		// the library triggers haptics via a hidden checkbox .click(),
+		// which gets suppressed during active touch event processing.
+		setTimeout(() => haptic(pattern), 0);
 	};
 
 	return (

@@ -18,9 +18,9 @@ export default function HomePage() {
 			</Link>
 			<Link
 				className="text-gray-500 underline transition-colors hover:text-gray-900"
-				href="/blob"
+				href="/gradients"
 			>
-				Animated Blob
+				Gradients
 			</Link>
 		</main>
 	);
