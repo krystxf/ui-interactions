@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useWebHaptics } from "web-haptics/react";
 import {
 	SquigglyBadgeAlert,
@@ -46,6 +46,7 @@ function HoverBadge({
 				setPressed(true);
 				onPress();
 			}}
+			onClick={onPress}
 			onMouseEnter={() => setHovered(true)}
 			onMouseLeave={() => {
 				setHovered(false);
@@ -53,6 +54,10 @@ function HoverBadge({
 			}}
 			onPointerUp={() => setPressed(false)}
 			onPointerCancel={() => setPressed(false)}
+			onTouchStart={() => {
+				setPressed(true);
+				onPress();
+			}}
 			type="button"
 		>
 			<Component
@@ -66,11 +71,20 @@ function HoverBadge({
 
 export default function SquiggliesPage() {
 	const { trigger: haptic } = useWebHaptics();
+	const lastHapticAtRef = useRef(0);
 
 	const handlePress = () => {
-		haptic("selection");
+		const now = Date.now();
+		if (now - lastHapticAtRef.current < 120) return;
+		lastHapticAtRef.current = now;
+
+		try {
+			haptic("selection");
+		} catch {
+			// Keep fallback vibration for browsers without full haptics support.
+		}
 		if (navigator.vibrate) {
-			navigator.vibrate(30);
+			navigator.vibrate(40);
 		}
 	};
 
