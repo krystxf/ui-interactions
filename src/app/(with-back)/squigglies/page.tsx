@@ -60,16 +60,14 @@ function HoverBadge({
 	return (
 		<button
 			className={`flex size-24 items-center justify-center rounded-full transition-all duration-150 ${hovered ? bg : "bg-gray-100"} ${pressed ? "scale-90" : "scale-100"} ${orderClass}`}
+			onClick={() => onPress()}
 			onMouseEnter={() => setHovered(true)}
 			onMouseLeave={() => {
 				setHovered(false);
 				setPressed(false);
 			}}
 			onPointerCancel={() => setPressed(false)}
-			onPointerDown={() => {
-				setPressed(true);
-				onPress();
-			}}
+			onPointerDown={() => setPressed(true)}
 			onPointerUp={() => setPressed(false)}
 			type="button"
 		>
@@ -83,7 +81,7 @@ function HoverBadge({
 }
 
 export default function SquiggliesPage() {
-	const { trigger: haptic } = useWebHaptics();
+	const { trigger } = useWebHaptics();
 	const lastHapticAtRef = useRef(0);
 
 	const handlePress = (pattern: (typeof variants)[number]["haptic"]) => {
@@ -91,10 +89,7 @@ export default function SquiggliesPage() {
 		if (now - lastHapticAtRef.current < 120) return;
 		lastHapticAtRef.current = now;
 
-		// Defer to escape the pointerdown event context — on iOS Safari,
-		// the library triggers haptics via a hidden checkbox .click(),
-		// which gets suppressed during active touch event processing.
-		setTimeout(() => haptic(pattern), 0);
+		trigger(pattern);
 	};
 
 	return (
