@@ -9,8 +9,9 @@ export function Footer() {
 	const [hovered, setHovered] = useState(false);
 
 	return (
+		// biome-ignore lint/a11y/noStaticElementInteractions: hover only animates decorative squiggle
 		<footer
-			className="fixed bottom-0 w-full"
+			className="w-full shrink-0 pt-10"
 			onMouseEnter={() => setHovered(true)}
 			onMouseLeave={() => setHovered(false)}
 		>
