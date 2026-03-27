@@ -44,7 +44,12 @@ export function SquigglyLine({
 	}, [animate]);
 
 	return (
-		<svg height="4" xmlns="http://www.w3.org/2000/svg" {...props}>
+		<svg
+			aria-hidden="true"
+			height="4"
+			xmlns="http://www.w3.org/2000/svg"
+			{...props}
+		>
 			<defs>
 				<pattern
 					height="4"

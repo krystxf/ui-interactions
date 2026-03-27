@@ -6,6 +6,7 @@ export function BadgeIcon({
 }: SVGProps<SVGSVGElement> & { ref?: Ref<SVGSVGElement> }) {
 	return (
 		<svg
+			aria-hidden="true"
 			fill="none"
 			ref={ref}
 			stroke="currentColor"

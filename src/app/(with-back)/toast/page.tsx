@@ -42,25 +42,21 @@ function ToastButtonWithBadge({
 	const [hovered, setHovered] = useState(false);
 
 	return (
-		<div
-			onMouseEnter={() => setHovered(true)}
-			onMouseLeave={() => setHovered(false)}
+		<Button
+			className={className}
+			onHoverChange={setHovered}
+			onPress={() =>
+				showAnimatedToast({
+					variant,
+					message,
+					position,
+				})
+			}
+			variant="secondary"
 		>
-			<Button
-				className={className}
-				onPress={() =>
-					showAnimatedToast({
-						variant,
-						message,
-						position,
-					})
-				}
-				variant="secondary"
-			>
-				<Badge animate={hovered} className="size-6" />
-				{label}
-			</Button>
-		</div>
+			<Badge animate={hovered} className="size-6" />
+			{label}
+		</Button>
 	);
 }
 
