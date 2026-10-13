@@ -1,0 +1,47 @@
+/* Registered so the color animates, and the avatar rings follow it */
+@property --avatar-list-bg {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: #f3f4f6;
+}
+
+:root {
+	--avatar-list-bg: var(--color-gray-100, #f3f4f6);
+	--avatar-list-bg-hover: var(--color-gray-200, #e5e7eb);
+	--avatar-list-bg-active: var(--color-gray-300, #d1d5db);
+	/* translucent, so it stays visible on every background state */
+	--avatar-list-border: rgb(0 0 0 / 0.08);
+}
+
+.avatar-list {
+	transition: --avatar-list-bg 150ms ease;
+}
+
+/* only the collapsed list is clickable */
+.avatar-list[data-expanded="false"]:hover {
+	--avatar-list-bg: var(--avatar-list-bg-hover);
+}
+
+.avatar-list[data-expanded="false"]:active {
+	--avatar-list-bg: var(--avatar-list-bg-active);
+}
+
+/* --avatar-list-top is set on open, see fitToScreen in use-avatar-list.ts */
+[data-animate-scroll] {
+	max-height: max(12rem, calc(100dvh - var(--avatar-list-top, 0px) - 1rem));
+	/* hidden on x, so avatars flying in never add a horizontal scrollbar */
+	overflow: hidden auto;
+	overscroll-behavior: contain;
+	border-radius: inherit;
+}
+
+.avatar-list-header {
+	transition:
+		background-color 150ms ease,
+		box-shadow 150ms ease;
+}
+
+[data-animate-scroll][data-scrolled] .avatar-list-header {
+	background-color: var(--avatar-list-bg);
+	box-shadow: 0 1px 0 var(--avatar-list-border);
+}
