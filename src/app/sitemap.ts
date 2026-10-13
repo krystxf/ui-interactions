@@ -20,5 +20,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
 			url: `${BASE_URL}/gradients`,
 			lastModified: new Date(),
 		},
+		{
+			url: `${BASE_URL}/avatar-list`,
+			lastModified: new Date(),
+		},
 	];
 }

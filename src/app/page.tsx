@@ -22,6 +22,12 @@ export default function HomePage() {
 			>
 				Gradients
 			</Link>
+			<Link
+				className="text-gray-500 underline transition-colors hover:text-gray-900"
+				href="/avatar-list"
+			>
+				Avatar List
+			</Link>
 		</main>
 	);
 }
